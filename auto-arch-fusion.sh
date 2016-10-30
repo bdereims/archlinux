@@ -35,3 +35,6 @@ Name=en*
 DHCP=ipv4
 EOF
 arch-chroot /mnt systemctl enable systemd-networkd
+rm -fr /mnt/etc/resolv.conf
+arch-chroot /mnt systemctl enable systemd-resolved
+arch-chroot ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
