@@ -39,6 +39,6 @@ rm -fr /mnt/etc/resolv.conf
 arch-chroot /mnt systemctl enable systemd-resolved
 mkdir -p /mnt/run/systemd/resolve
 touch /mnt/run/systemd/resolve/resolv.conf
-arch-chroot ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+arch-chroot /mnt ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 rm /mnt/run/systemd/resolve/resolv.conf
 
