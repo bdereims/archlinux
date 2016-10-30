@@ -13,7 +13,7 @@ mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
 # Install Arch Linux
-pacstrap /mnt base grub-bios openssh sudo alsa-utils xorg-server xorg-xinit xorg-server-utils ttf-dejavu cinnamon terminator firefox
+pacstrap /mnt base grub-bios openssh sudo alsa-utils xorg-server xorg-xinit xorg-server-utils ttf-dejavu cinnamon terminator firefox open-vm-tools
 
 # Some configrations 
 genfstab -U -p /mnt > /mnt/etc/fstab
