@@ -18,11 +18,11 @@ pacstrap /mnt base grub-bios openssh sudo alsa-utils xorg-server xorg-xinit xorg
 # Some configrations 
 genfstab -U -p /mnt > /mnt/etc/fstab
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+sed -i "s/#en_US.UTF/en_US.UTF/" /mnt/etc/locale.gen
+arch-chroot /mnt locale-gen
 echo "root:arch" | chpasswd -R /mnt
 arch-chroot /mnt grub-install --target=i386-pc --recheck /dev/sda
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
-sed -i "s/#en_US.UTF/en_US.UTF/" /mnt/etc/locale.gen
-arch-chroot /mnt locale-gen
 arch-chroot /mnt systemctl enable sshd
 echo "exec cinnamon-session" > /mnt/root/.xinitrc
 echo "archlinux" > /mnt/etc/hostname
@@ -37,4 +37,8 @@ EOF
 arch-chroot /mnt systemctl enable systemd-networkd
 rm -fr /mnt/etc/resolv.conf
 arch-chroot /mnt systemctl enable systemd-resolved
+mkdir -p /mnt/run/systemd/resolve
+touch /mnt/run/systemd/resolve/resolv.conf
 arch-chroot ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+rm /mnt/run/systemd/resolve/resolv.conf
+
