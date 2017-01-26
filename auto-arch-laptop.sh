@@ -13,9 +13,10 @@ genfstab -U -p /mnt > /mnt/etc/fstab
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 sed -i "s/#en_US.UTF/en_US.UTF/" /mnt/etc/locale.gen
 arch-chroot /mnt locale-gen
+arch-chroot /mnt rm /etc/localtime 
 arch-chroot /mnt ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 arch-chroot /mnt hwclock --systohc --utc
-arch-chroot /mnt useradd -m -g users -G wheel -s /bin/bash bdereims
+arch-chroot /mnt useradd -m -g users -G wheel -m -s /bin/bash bdereims
 echo "root:arch" | chpasswd -R /mnt
 echo "bdereims:arch" | chpasswd -R /mnt
 arch-chroot /mnt systemctl enable sshd
